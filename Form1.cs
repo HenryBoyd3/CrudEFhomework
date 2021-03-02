@@ -50,56 +50,61 @@ namespace CrudEFhomework
         {
             AddUser ad = new AddUser(userView);
             ad.Show();
-            
-
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             int userID=0;
-            if (userView.Rows.Count>0) 
-            { 
-            userView.Rows[userView.CurrentCell.RowIndex].Selected = true;
-            if (userView.SelectedRows[0].Cells[0].Value != DBNull.Value)
+            if (userView.Rows.Count > 0)
             {
-                userID = (Int32)userView.SelectedRows[0].Cells[0].Value;
+                userView.Rows[userView.CurrentCell.RowIndex].Selected = true;
+                if (userView.SelectedRows[0].Cells[0].Value != DBNull.Value)
+                {
+                    userID = (Int32)userView.SelectedRows[0].Cells[0].Value;
+                }
+                var newUser = stx.Customers.First(c => c.Id == userID);
+                var thisUser = userView.SelectedRows;
+                foreach (DataGridViewRow cell in thisUser)
+                {
+                    if (string.IsNullOrEmpty(cell.Cells[1].Value.ToString())) { MessageBox.Show("enter a first Name"); }
+                    else { newUser.FirstName = cell.Cells[1].Value.ToString(); }
+                    if (string.IsNullOrEmpty(cell.Cells[2].Value.ToString())) { MessageBox.Show("enter a last Name"); }
+                    else { newUser.LastName = cell.Cells[2].Value.ToString(); }
+                    if (string.IsNullOrEmpty(cell.Cells[3].Value.ToString())) { newUser.City = null; }
+                    else { newUser.City = cell.Cells[3].Value.ToString(); }
+                    if (string.IsNullOrEmpty(cell.Cells[4].Value.ToString())) { newUser.Country = null; }
+                    else { newUser.Country = cell.Cells[4].Value.ToString(); }
+                    if (string.IsNullOrEmpty(cell.Cells[5].Value.ToString())) { newUser.Phone = null; }
+                    else { newUser.Phone = cell.Cells[5].Value.ToString(); }
+                }
+                stx.SaveChanges();
+                getUsers();
             }
-            var newUser = stx.Customers.First(c => c.Id == userID);
-            var thisUser = userView.SelectedRows;
-            foreach (DataGridViewRow cell in thisUser)
+            else
             {
-                if (string.IsNullOrEmpty(cell.Cells[1].Value.ToString())) { MessageBox.Show("enter a first Name"); }
-                else { newUser.FirstName = cell.Cells[1].Value.ToString(); }
-                if ( string.IsNullOrEmpty(cell.Cells[2].Value.ToString())) { MessageBox.Show("enter a last Name"); }
-                else { newUser.LastName = cell.Cells[2].Value.ToString(); }
-                if (string.IsNullOrEmpty(cell.Cells[3].Value.ToString())) { newUser.City = null; }
-                else { newUser.City = cell.Cells[3].Value.ToString(); }
-                if (string.IsNullOrEmpty(cell.Cells[4].Value.ToString())) { newUser.Country = null; }
-                else {newUser.Country = cell.Cells[4].Value.ToString();}
-                if (string.IsNullOrEmpty(cell.Cells[5].Value.ToString())) { newUser.Phone = null; }
-                else { newUser.Phone = cell.Cells[5].Value.ToString(); }
+                MessageBox.Show("to update a row please search then select a row");
             }
-            stx.SaveChanges();
-            getUsers();
-            }
-            MessageBox.Show("to update a row please search then select a row");
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if(searchBox.TextLength >0)
             { 
-            int userID=0;
-            userView.Rows[userView.CurrentCell.RowIndex].Selected = true;
-            if (userView.SelectedRows[0].Cells[0].Value != DBNull.Value)
-            {
-                userID = (Int32)userView.SelectedRows[0].Cells[0].Value;
+                int userID=0;
+                userView.Rows[userView.CurrentCell.RowIndex].Selected = true;
+                if (userView.SelectedRows[0].Cells[0].Value != DBNull.Value)
+                    {
+                        userID = (Int32)userView.SelectedRows[0].Cells[0].Value;
+                    }
+                stx.Remove(stx.Customers.Single(u => u.Id == userID));
+                stx.SaveChanges();
+                getUsers();
             }
-            stx.Remove(stx.Customers.Single(u => u.Id == userID));
-            stx.SaveChanges();
+            else
+            { 
+                MessageBox.Show("to delete a user please search then select a row"); 
             }
-            getUsers();
-            MessageBox.Show("to delete a user please search then select a row");
+                
         }
         private void getUsers()
         {
