@@ -40,6 +40,9 @@ namespace CrudEFhomework
             this.searchBox = new System.Windows.Forms.TextBox();
             this.radioLetter = new System.Windows.Forms.RadioButton();
             this.filterBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.userView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,7 +68,7 @@ namespace CrudEFhomework
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(714, 267);
+            this.buttonDelete.Location = new System.Drawing.Point(714, 311);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonDelete.TabIndex = 2;
@@ -75,7 +78,7 @@ namespace CrudEFhomework
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(714, 228);
+            this.buttonUpdate.Location = new System.Drawing.Point(714, 248);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonUpdate.TabIndex = 3;
@@ -150,11 +153,40 @@ namespace CrudEFhomework
             this.filterBox.Size = new System.Drawing.Size(233, 23);
             this.filterBox.TabIndex = 10;
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(804, 190);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(242, 38);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Add user will bring up a new window to enter data.";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(804, 248);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(233, 39);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Enter a last name you want to update then select and edit the data you want to ch" +
+    "age";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(804, 311);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(233, 54);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "To delete a user search for the name you want to delete then select the user and " +
+    "then click delete button\r\n";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 684);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.filterBox);
             this.Controls.Add(this.radioLetter);
             this.Controls.Add(this.searchBox);
@@ -188,6 +220,9 @@ namespace CrudEFhomework
         private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.RadioButton radioLetter;
         private System.Windows.Forms.TextBox filterBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 
