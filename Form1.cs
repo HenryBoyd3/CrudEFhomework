@@ -28,21 +28,28 @@ namespace CrudEFhomework
 
         private void button5_Click(object sender, EventArgs e)
         {
-            userView.DataSource = stx.Customers.Where(c => c.LastName == searchBox.Text.ToString())
-                .Select(a => new { a.FirstName, a.LastName, a.City, a.Country, a.Phone }).ToList();
+            userView.DataSource = stx.Customers.Where(c => c.LastName == searchBox.Text.ToString()).ToList();
+            userView.Columns[0].Visible = false;
+         
         }
 
         private void buttonFilter_Click(object sender, EventArgs e)
         {
             if (radioName.Checked)
-            { userView.DataSource = stx.Customers.Where(c => c.LastName == filterBox.Text.ToString()).
-                    Select(a => new { a.FirstName, a.LastName, a.City, a.Country, a.Phone }).ToList(); }
+            { 
+                userView.DataSource = stx.Customers.Where(c => c.LastName == filterBox.Text.ToString()).ToList();
+                userView.Columns[0].Visible = false;
+            }
             else if (radioCity.Checked)
-            { userView.DataSource = stx.Customers.Where(c => c.City == filterBox.Text.ToString()).
-                    Select(a => new { a.FirstName, a.LastName, a.City, a.Country, a.Phone }).ToList(); }
+            { 
+                userView.DataSource = stx.Customers.Where(c => c.City == filterBox.Text.ToString()).ToList();
+                userView.Columns[0].Visible = false;
+            }
             else if (radioLetter.Checked&& filterBox.TextLength > 0)
-            { userView.DataSource = stx.Customers.Where(c => c.LastName.StartsWith(filterBox.Text.First().
-                ToString())).Select(a => new { a.FirstName, a.LastName, a.City, a.Country, a.Phone }).ToList(); }
+            { 
+                userView.DataSource = stx.Customers.Where(c => c.LastName.StartsWith(filterBox.Text.First().ToString())).ToList();
+                userView.Columns[0].Visible = false;
+            }
 
         }
 
@@ -88,9 +95,10 @@ namespace CrudEFhomework
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            if(searchBox.TextLength >0)
+            int userID = 0;
+            if (userView.Rows.Count > 0)
             { 
-                int userID=0;
+                
                 userView.Rows[userView.CurrentCell.RowIndex].Selected = true;
                 if (userView.SelectedRows[0].Cells[0].Value != DBNull.Value)
                     {
@@ -108,7 +116,8 @@ namespace CrudEFhomework
         }
         private void getUsers()
         {
-            userView.DataSource = stx.Customers.OrderBy(c => c.Id).Select(a => new {a.FirstName, a.LastName, a.City, a.Country,a.Phone }).ToList();
+            userView.DataSource = stx.Customers.OrderBy(c => c.Id).ToList();
+            
         }
 
     }

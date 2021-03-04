@@ -49,7 +49,8 @@ namespace CrudEFhomework
                 };
                 stx.Add<Customer>(newUser);
                 stx.SaveChanges();
-                userData.DataSource = stx.Customers.OrderBy(c => c.Id).Select(a => new { a.FirstName, a.LastName, a.City, a.Country, a.Phone }).ToList();
+                userData.DataSource = stx.Customers.OrderBy(c => c.Id).ToList();
+                userData.Columns[0].Visible = false;
                 this.Close();
             }
         }

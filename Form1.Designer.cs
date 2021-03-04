@@ -46,6 +46,7 @@ namespace CrudEFhomework
             // userView
             // 
             this.userView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.userView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.userView.Location = new System.Drawing.Point(12, 12);
             this.userView.Name = "userView";
             this.userView.RowTemplate.Height = 25;
